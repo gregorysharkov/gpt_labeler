@@ -2,6 +2,8 @@
 
 from flask import Flask, redirect, render_template, request, url_for
 
+from src.request_utils import generate_response
+
 app = Flask(__name__)
 
 @app.route("/", methods=("GET", "POST"))
@@ -32,7 +34,10 @@ def process_review(review: str | None) -> str:
     if review is None:
         return ""
 
-    return "Thank you for your review, " + review
+    response = generate_response(review)
+    response_text = response['choices'][0]['message'].content
+
+    return "Thank you for your review<br/>" + response_text
 
 
 if __name__ == "__main__":
