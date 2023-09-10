@@ -22,12 +22,15 @@
             </div>
         </form>
     </div>
-    {% if processed_review %}
+    {% if answer_list %}
     <div class="testbox">
+        {% for answer in answer_list %}
         <div class="result">
-            <p>Processed review:</p>
-            <p>{{ processed_review }}</p>
+            <p class="question">{{ answer['short_question'] }}</p>
+            <p>Numeric answer: {{ answer['numeric_answer'] }}</p>
+            <p>Comment: {{ answer['comment'] }}</p>
         </div>
+        {% endfor %}
     </div>
     {% endif %}
 </body>
